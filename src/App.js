@@ -9,43 +9,31 @@ import styles from './App.module.css';
 class App extends React.Component {
   state = {
     countries: [],
-    searchTerm: '',
   }
 
   async componentDidMount() {
-    this.setState({ countries: await getCountries() });
+    const countries = await getCountries();
+
+    this.setState({ countries });
   }
 
-  searchCountry = async (country) => {
+  searchCountry = async (value) => {
     const { countries } = this.state;
 
-    const countryy = countries.find((country) => country.name.includes('country'));
+    const filteredCountries = countries.filter((country) => country.name.toLowerCase().includes(value.toLowerCase()));
 
-    console.log(countryy);
-
-    this.setState({ countries: await getCountries(country) });
-  }
-
-  handleChange = (event) => {
-    this.setState({ searchTerm: event.target.value });
-
-    this.searchCountry(this.state.searchTerm)
+    this.setState({ countries: filteredCountries });
   }
 
   render() {
-    const { countries, searchTerm } = this.state;
+    const { countries } = this.state;
 
     console.log(countries);
 
     return (
       <div className={styles.container}>
         <h1>Countries API</h1>
-        <input 
-            className={styles.search}
-            value={searchTerm} 
-            onChange={(e) => this.handleChange(e)}
-            placeholder="Type Country + Enter"
-        />
+        <Search searchCountry={this.searchCountry} />
         {countries.length ? <CountryCards countries={countries} /> : null}
       </div>
     )
