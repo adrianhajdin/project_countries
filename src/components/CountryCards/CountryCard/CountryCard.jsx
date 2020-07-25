@@ -4,9 +4,9 @@ import styles from './CountryCard.module.css';
 
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core'
 
-const CountryCard = ({ country: { name, nativeName, alpha2Code, subregion, capital, population, area, currencies, flag }}) => (
+const CountryCard = ({ country: { name, nativeName, subregion, capital, population, area, currencies, flag }}) => (
   <Card className={styles.card}>
-    <CardActionArea>
+    <CardActionArea href={`https://en.wikipedia.org/wiki/${name}`}>
       <CardMedia className={styles.cardImage} image={flag} title={`${name} flag`} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">{name} {`(${nativeName})`}</Typography>
