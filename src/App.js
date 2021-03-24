@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+import React from 'react';
+>>>>>>> 6c9257f9212e3d7b91a08a81f9161a17b14cffc9
 
 import getCountries from './api';
 
